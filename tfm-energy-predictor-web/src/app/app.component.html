@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <span>{{ 'TITLE' | translate }}</span>
+  <span class="spacer"></span>
+  <button mat-button routerLink="/charts" routerLinkActive="router-active"><mat-icon>timeline</mat-icon> {{ 'MENU.CHARTS' | translate }}</button>
+  <button mat-button routerLink="/tables" routerLinkActive="router-active"><mat-icon>view_module</mat-icon>{{ 'MENU.TABLES' | translate }}</button>
+  <button mat-button routerLink="/simulation" routerLinkActive="router-active"><mat-icon>update</mat-icon>{{ 'MENU.SIMULATION' | translate }}</button>
+  <button mat-button routerLink="/help" routerLinkActive="router-active"><mat-icon>help_outline</mat-icon>{{ 'MENU.HELP' | translate }}</button>
+  <span class="spacer"></span>
+  <button mat-button [matMenuTriggerFor]="beforeMenu"><mat-icon>public</mat-icon> {{ 'LANGUAGE' | translate}} ({{ currentLanguage }})</button>
+  <mat-menu #beforeMenu="matMenu" xPosition="before">
+    <button mat-menu-item (click)="switchLanguage('en')">English</button>
+    <button mat-menu-item (click)="switchLanguage('es')">Español</button>
+  </mat-menu>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

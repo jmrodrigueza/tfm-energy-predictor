@@ -1,0 +1,82 @@
+<div>
+  <mat-toolbar class="sub-menu">
+      <mat-form-field>
+        <mat-label>{{ 'SELECT_DATE' | translate }}</mat-label>
+        <input matInput [matDatepicker]="datepicker" [(ngModel)]="selectedDate" [min]="minDate" [max]="maxDate">
+        <mat-datepicker #datepicker/>
+        <mat-datepicker-toggle [for]="datepicker" matSuffix/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'SELECT_TIME' | translate }}</mat-label>
+        <input matInput [matTimepicker]="timepicker" [(ngModel)]="selectedDate" [ngModelOptions]="{updateOn: 'blur'}">
+        <mat-timepicker #timepicker/>
+        <mat-timepicker-toggle [for]="timepicker" matSuffix/>
+      </mat-form-field>
+      <div class="vertical-aligment">
+        <button mat-icon-button matTooltip="{{ 'REFRESH' | translate}}" color="primary" (click)="refreshData()">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+
+  </mat-toolbar>
+  <div class="container-chart">
+    <div class="container content" fxLayout fxLayoutAlign="center" fxLayoutGap="10px">
+      <div class="item item-1" fxFlex="10%"></div>
+      <div class="item item-2" fxFlex="70%">
+        <mat-card>
+          <ng-container *ngIf="dataNoAvailable">
+            <label class="mat-h5 mat-body-strong graphics-not-available">{{ 'GRAPHICS_NOT_AVAILABLE'  | translate }} </label>
+          </ng-container>
+          <ng-container *ngIf="!dataNoAvailable">
+            <mat-tab-group #enertyTabs (selectedIndexChange)="onTabChanged($event)" preserveContent>
+              <mat-tab label="{{ 'MENU.DEMAND' | translate }}">
+                <canvas #demandChart baseChart
+                        [data]="demandChartData"
+                        [options]="lineChartOptions"
+                        [type]="'line'">
+                </canvas>
+              </mat-tab>
+              <mat-tab label="{{ 'MENU.PRODUCTION' | translate }}">
+                <canvas #productionChart baseChart
+                        [data]="productionChartData"
+                        [options]="lineChartOptions"
+                        [type]="'line'">
+                </canvas>
+              </mat-tab>
+              <mat-tab label="{{ 'MENU.EMISSIONS' | translate }}">
+                <canvas #emissionsChart baseChart
+                        [data]="emissionsChartData"
+                        [options]="lineChartOptions"
+                        [type]="'line'">
+                </canvas>
+              </mat-tab>
+            </mat-tab-group>
+          </ng-container>
+        </mat-card>
+      </div>
+      <div class="item item-3" fxFlex="20%">
+        <mat-card appearance="outlined">
+          <mat-card-header>
+            <mat-card-title>MAPE:</mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content fxLayout="column" fxLayoutGap="4px">
+            
+            <ng-container *ngIf="!dataNoAvailable">
+              <ng-container *ngFor="let entry of mapeMetrics | keyvalue">
+                <label class="mat-h5 mat-body-strong">{{ entry.key  | translate }} </label>
+                <label class="mat-h5">{{ entry.value | number:'1.4-4' }}</label>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="dataNoAvailable">
+              <label class="mat-h5 mat-body-strong">{{ 'MAPE_NOT_AVAILABLE'  | translate }} </label>
+            </ng-container>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div *ngIf="showProgressSpinner" class="overlay">
+        <mat-spinner mode="indeterminate"></mat-spinner>
+    </div>
+  </div>
+</div>

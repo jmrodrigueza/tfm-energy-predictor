@@ -1,0 +1,60 @@
+<div>
+  <mat-toolbar class="sub-menu">
+    <mat-form-field>
+      <mat-label>{{ 'SELECT_DATE' | translate }}</mat-label>
+      <input matInput [matDatepicker]="datepicker" [(ngModel)]="selectedDate" [min]="minDate" [max]="maxDate">
+      <mat-datepicker #datepicker/>
+      <mat-datepicker-toggle [for]="datepicker" matSuffix/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'SELECT_TIME' | translate }}</mat-label>
+      <input matInput [matTimepicker]="timepicker" [(ngModel)]="selectedDate" [ngModelOptions]="{updateOn: 'blur'}">
+      <mat-timepicker #timepicker/>
+      <mat-timepicker-toggle [for]="timepicker" matSuffix/>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="filter-bar margin-search" [style.width.px]=300>
+      <mat-label>{{ 'SEARCH' | translate }}</mat-label>
+      <input matInput placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}" #filterInput (keyup)="applyFilter(filterInput.value)" />
+    </mat-form-field>
+    <button mat-icon-button matTooltip="{{ 'REFRESH' | translate}}" color="primary" (click)="refreshData()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="{{ 'SAVE' | translate}}" color="primary" (click)="exportToCSV()">
+      <mat-icon>save</mat-icon>
+    </button>
+  </mat-toolbar>
+  
+  <div class="container-chart">
+    
+    <ng-container *ngIf="dataNoAvailable">
+      <label class="mat-h5 mat-body-strong table-not-available">{{ 'TABLE_NOT_AVAILABLE'  | translate }} </label>
+    </ng-container>
+    
+    <ng-container *ngIf="!dataNoAvailable">
+      <table mat-table [dataSource]="energyData" matSort class="mat-elevation-z8 content">
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TYPE' | translate }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.type | translate }}</td>
+        </ng-container>
+        <ng-container matColumnDef="variable">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'VARIABLE' | translate }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.variable | translate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="datetime">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'DATETIME' | translate }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.datetime }}</td>
+        </ng-container>
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'VALUE' | translate }} (MW/CO&#8322;)</th>
+          <td mat-cell *matCellDef="let element">{{ element.value | number:'1.2-2' }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </ng-container>
+    <div *ngIf="showProgressSpinner" class="overlay">
+        <mat-spinner mode="indeterminate"></mat-spinner>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+.spacer {
+  flex: 1 1 auto; /* Languaje to the right */
+}
+
+mat-nav-list {
+  margin-top: 16px;
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.router-active{
+  background-color: #4c2c86;
+}

@@ -1,0 +1,132 @@
+<div class="help-page">
+    <button mat-stroked-button (click)="scrollToTop()" class="scroll-to-top round-button" *ngIf="windowScrolled">
+        <mat-icon class="custom-icon">arrow_upward</mat-icon>
+    </button>
+    <div class="m-b-20">
+        <label class="mat-h2">{{ 'MENU.HELP' | translate }}</label>
+    </div>
+    
+    <label class="mat-h4 mat-body center-txt">{{ 'HELP.DESCRIPTION' | translate }}</label>
+    <ul class="mat-h4 mat-body">
+        <li>
+            {{ 'HELP.MAIN_VIEWS' | translate }}
+            <ul>
+                <li><a href="/help#demand">{{ 'MENU.CHARTS' | translate }}</a></li>
+                <li><a href="/help#table">{{ 'MENU.TABLES' | translate }}</a></li>
+                <li><a href="/help#simulation">{{ 'MENU.SIMULATION' | translate }}</a></li>
+                <li>{{ 'HELP.THIS_PAGE' | translate }}</li>
+            </ul>
+        </li>
+        <li>
+            {{ 'HELP.ADDITIONAL_FUNC' | translate }}
+            <ul>
+                <li><a href="/help#time-series-selection">{{ 'HELP.TIMESERIES_TO_VIEW' | translate }}</a></li>
+                <li><a href="/help#calendar">{{ 'HELP.CALENDAR' | translate }}</a></li>
+                <li><a href="/help#date-time">{{ 'HELP.DATETIME_AND_REFRESH' | translate }}</a></li>
+                <li><a href="/help#search-filter">{{ 'HELP.SEARCH_FILTER' | translate }}</a></li>
+                <li><a href="/help#csv-export">{{ 'HELP.CSV_EXPORT' | translate }}</a></li>
+                <li><a href="/help#language">{{ 'LANGUAGE' | translate }}</a></li>
+            </ul>
+        </li>
+    </ul>
+    <mat-divider></mat-divider>
+    
+    <div class="container-help">
+        <div class="container content" fxLayout fxLayoutAlign="center" fxLayoutGap="10px">
+            <div class="item item-1" fxFlex="10%"></div>
+            <div class="item item-2" fxFlex="70%">
+                <mat-card id="demand" class="screen-card" appearance="outlined">
+                    <mat-card-header>
+                    <mat-card-title>{{ 'MENU.CHARTS' | translate }}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <label class="mat-h4 mat-body center-txt">
+                            {{ 'HELP.DEMAND_DESC' | translate }}
+                        </label>
+                        <img class="screen-card-content" src="assets/help-screens/demand-graph.png"/>
+                        <label class="mat-h4 mat-body center-txt">
+                            {{ 'HELP.PRODUCTION_DESC' | translate }}
+                        </label>
+                        <img class="screen-card-content" src="assets/help-screens/production-graph.png"/>
+                        <label class="mat-h4 mat-body center-txt">
+                            {{ 'HELP.EMISSIONS_DESC' | translate }}
+                        </label>
+                        <img class="screen-card-content" src="assets/help-screens/emission-graph.png"/>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card id="table" class="screen-card" appearance="outlined">
+                    <mat-card-header>
+                    <mat-card-title>{{ 'MENU.TABLES' | translate }}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <label class="mat-h4 mat-body center-txt">
+                            {{ 'HELP.TABLE_DESC' | translate }}
+                        </label>
+                        <img mat-card-image class="screen-card-content" src="assets/help-screens/table.png"/>
+                        <label id="search-filter" class="mat-h4 mat-body center-txt">
+                            {{ 'HELP.SEARCH_FILTER_DESC' | translate }}
+                        </label>
+                        <img mat-card-image class="screen-card-content" src="assets/help-screens/search-filter.png"/>
+                        <label id="csv-export" class="mat-h4 mat-body center-txt">
+                            {{ 'HELP.CSV_EXPORT_DESC1' | translate }}
+                        </label>
+                        <img mat-card-image class="screen-card-content" src="assets/help-screens/export-csv1.png"/>
+                        <label class="mat-h4 mat-body center-txt">
+                            {{ 'HELP.CSV_EXPORT_DESC2' | translate }}
+                        </label>
+                        <img mat-card-image class="screen-card-content" src="assets/help-screens/export-csv2.png"/>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card id="simulation" class="screen-card" appearance="outlined">
+                    <mat-card-header>
+                    <mat-card-title>{{ 'MENU.SIMULATION' | translate }}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <label class="mat-h4 mat-body center-txt">
+                            {{ 'HELP.SIMULATION_DESC' | translate }}
+                        </label>
+                        <img mat-card-image class="screen-card-content" src="assets/help-screens/simulation.png"/>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card id="time-series-selection" class="screen-card" appearance="outlined">
+                    <mat-card-header>
+                    <mat-card-title>{{ 'HELP.TIMESERIE_TO_SHOW' | translate }}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <label class="mat-h4 mat-body center-txt">
+                            {{ 'HELP.TIMESERIE_DESC' | translate }}
+                        </label>
+                        <img mat-card-image class="screen-card-content" src="assets/help-screens/select-series.png"/>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card id="calendar" class="screen-card" appearance="outlined">
+                    <mat-card-header>
+                    <mat-card-title>{{ 'HELP.CALENDAR' | translate }}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <label class="mat-h4 mat-body center-txt">
+                            {{ 'HELP.CALENDAR_DESC' | translate }}
+                        </label>
+                        <img mat-card-image class="screen-card-content" src="assets/help-screens/calendar.png"/>
+                        <label id="date-time" class="mat-h4 mat-body center-txt">
+                            {{ 'HELP.DATETIME_DESC' | translate }}
+                        </label>
+                        <img mat-card-image class="screen-card-content" src="assets/help-screens/date-time.png"/>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card id="language" class="screen-card" appearance="outlined">
+                    <mat-card-header>
+                    <mat-card-title>{{ 'LANGUAGE' | translate }}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <label class="mat-h4 mat-body center-txt">
+                            {{ 'HELP.LANGUAGE_DESC' | translate }}
+                        </label>
+                        <img mat-card-image class="screen-card-content" src="assets/help-screens/languages.png"/>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="item item-1" fxFlex="10%"></div>
+        </div>
+    </div>
+</div>

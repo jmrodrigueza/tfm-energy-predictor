@@ -1,0 +1,9 @@
+.git/
+AEMET-data/
+EUMESAT-data/
+REE-data/
+TFM_notebook_colab
+__pycache__/
+trained_models/
+output_figures/
+*/node_modules/

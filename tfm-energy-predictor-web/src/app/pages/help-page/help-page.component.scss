@@ -1,0 +1,77 @@
+
+.help-page {
+    margin: 30px;
+}
+
+.m-b-10 {
+    margin-bottom: 10px;
+}
+
+.m-b-20 {
+    margin-bottom: 20px;
+}
+
+.screen-card {
+    max-width: 100%;
+    margin-top: 5px;
+}
+
+.center-txt {
+    text-align: justify;
+    display: block;
+}
+
+mat-card-content {
+    margin-top: 15px;
+}
+
+ul {
+    list-style-type: square;
+}
+
+a {
+    color: #006adc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #003063;
+    text-decoration: underline;
+}
+
+.screen-card-content {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    max-width: 730px;
+    border: 1px solid #ccc;
+}
+
+.container-help {
+    position: relative;
+    width: 100%;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.custom-icon {
+    transform: scale(1.1);
+    padding: 0px;
+    margin: 0px;
+}
+
+.round-button {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}

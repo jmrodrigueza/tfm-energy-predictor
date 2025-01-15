@@ -1,0 +1,22 @@
+@use '@angular/material' as mat;
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html {
+    scroll-behavior: smooth;
+}
+
+.success-snackbar {
+    @include mat.snack-bar-overrides((
+        container-shape: 10px,
+        container-color: #065500,
+        supporting-text-color: white
+    ));
+}
+
+.error-snackbar {
+    @include mat.snack-bar-overrides((
+        container-shape: 10px,
+        container-color: #790000,
+        supporting-text-color: white
+    ));
+}
