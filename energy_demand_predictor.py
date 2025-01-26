@@ -79,3 +79,4 @@ if __name__ == '__main__':
     edp.plot_results(pred_to_plot=720)
     df_mape = edp.evaluate()
     edp.plot_mape_values(df_mape, 'la demanda', ['Demanda'], logarithmic_scale=False)
+    evaluate_nrmse = edp.evaluate_nrmse()

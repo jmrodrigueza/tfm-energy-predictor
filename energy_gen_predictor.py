@@ -94,3 +94,4 @@ if __name__ == '__main__':
     emm.plot_results(pred_to_plot=720)
     df_mape = emm.evaluate()
     emm.plot_mape_values(df_mape, 'producción', ['Eólica', 'Hidráulica', 'Solar fotovoltaica', 'Solar térmica'])
+    evaluate_nrmse = emm.evaluate_nrmse()

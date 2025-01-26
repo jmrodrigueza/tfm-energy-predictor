@@ -118,6 +118,7 @@ if __name__ == '__main__':
     # Load, predict and evaluate
     df_plot = pd.DataFrame()
     df_mape = pd.DataFrame()
+    df_nrmse = pd.DataFrame()
     pred_to_plot = 720
     for prediction_type in EmissionPredictionType:
         esep = EnergySimulateEmiPredictor(prediction_type=prediction_type)
@@ -134,6 +135,10 @@ if __name__ == '__main__':
         if df_mape.empty:
             df_mape = df_mape_eval[['datetime']]
         df_mape = pd.concat([df_mape, df_mape_eval.iloc[:, 1:]], axis=1)
+        df_nrmse_eval = esep.evaluate_nrmse()
+        if df_nrmse.empty:
+            df_nrmse = df_nrmse_eval[['datetime']]
+        df_nrmse = pd.concat([df_nrmse, df_nrmse_eval.iloc[:, 1:]], axis=1)
 
     cm.plot_series(df_plot.iloc[-pred_to_plot:],
                    np.array([['Carbon_emi_pred', 'Carbon_emi_test_real'],
@@ -156,3 +161,10 @@ if __name__ == '__main__':
     esep.plot_mape_values(df_mape, 'Simulación de emisiones de $CO_2$',
                           ['Carbón', 'Ciclo combinado', 'Cogeneración', 'Motores diésel', 'Turbina de gas',
                            'Turbina de vapor'])
+    print(df_nrmse)
+    last_days = 30
+    # mean NRMSE for the last 30 days for all columns
+    print(f'Mean NRMSE last {last_days} days for all columns:')
+    print(df_nrmse.iloc[-last_days:].mean())
+    print(f'Median NRMSE last {last_days} days for all columns:')
+    print(df_nrmse.iloc[-last_days:].median())

@@ -103,4 +103,5 @@ if __name__ == '__main__':
     eep.plot_mape_values(df_mape, 'las emisiones de $CO_2$',
                          ['Carbón', 'Ciclo combinado', 'Motores diésel', 'Turbina de vapor', 'Turbina de gas',
                           'Cogeneración'])
+    eep.evaluate_nrmse()
 

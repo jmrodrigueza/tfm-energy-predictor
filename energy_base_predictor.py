@@ -385,6 +385,43 @@ class EnergyBasePredictor:
 
         return df_mape_daily
 
+    def evaluate_nrmse(self):
+        """
+        Calculate NRMSE (Normalized Root Mean Squared Error)
+        :return: The NRMSE values for each target column
+        """
+        df_nrmse = pd.DataFrame()
+        df_nrmse['datetime'] = pd.to_datetime({'year': self.df_comparative['Ano'], 'month': self.df_comparative['Mes'],
+                                              'day': self.df_comparative['Dia']})
+        df_nrmse_daily = pd.DataFrame()
+        for column in self.target_columns:
+            df_nrmse_col = df_nrmse.copy()
+            df_nrmse_col[f'{column}_real'] = self.df_comparative[f'{column}_test_real'].values
+            df_nrmse_col[f'{column}_pred'] = self.df_comparative[f'{column}_pred'].values
+            df_nrmse_col_daily = df_nrmse_col.groupby(['datetime']) \
+                .apply(
+                    lambda x:
+                    (np.sqrt(np.mean((x[f'{column}_real'] - x[f'{column}_pred']) ** 2))) /
+                    np.abs(np.max(x[f'{column}_real']) - np.min(x[f'{column}_real']))
+                )
+
+            df_nrmse_col_daily = df_nrmse_col_daily.reset_index()
+            df_nrmse_col_daily.name = f'{column}_daily_mape'
+            # append datetime if not exists
+            if 'datetime' not in df_nrmse_daily.columns:
+                df_nrmse_daily['datetime'] = df_nrmse_col_daily['datetime']
+            df_nrmse_daily[f'{column}_daily_mape'] = df_nrmse_col_daily[0]
+        last_days = 30
+        print(f'Normalized Root Mean Squared Error (NRMSE) last {last_days} days:')
+        print(df_nrmse_daily.iloc[-last_days:])
+        # mean NRMSE for the last 30 days for all columns
+        print(f'Mean NRMSE last {last_days} days for all columns:')
+        print(df_nrmse_daily.iloc[-last_days:].mean())
+        print(f'Median NRMSE last {last_days} days for all columns:')
+        print(df_nrmse_daily.iloc[-last_days:].median())
+
+        return df_nrmse_daily
+
     def plot_mape_values(self, df_mape: pd.DataFrame, model_title: str, labels: list, logarithmic_scale=True,
                          ylim_bottom=None, scaled_values=False):
         df_mape['datetime'] = pd.to_datetime(df_mape['datetime'])
