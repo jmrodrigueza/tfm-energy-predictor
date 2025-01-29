@@ -4,7 +4,7 @@ WORKDIR /app
 COPY tfm-energy-predictor-web/package.json tfm-energy-predictor-web/package-lock.json ./
 RUN npm install
 COPY tfm-energy-predictor-web/ .
-RUN npm run build --prod
+RUN npx ng build --configuration production --base-href /tfm/
 
 # Step 2: Build Backend
 FROM python:3.9-slim AS backend
@@ -23,7 +23,8 @@ COPY tfm-energy-predictor-backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY tfm-energy-predictor-backend/ .
 # Frontend
-COPY --from=angular-build /app/dist/tfm-energy-predictor-web/browser/ /var/www/html/
+RUN mkdir -p /var/www/html/tfm
+COPY --from=angular-build /app/dist/tfm-energy-predictor-web/browser/ /var/www/html/tfm
 EXPOSE 5000
 EXPOSE 8888
 
